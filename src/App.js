@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import PostsList from './posts/PostsList';
+import Header from './layout/Header';
+import Content from './layout/Content';
+import Sider from './layout/Sider';
 import LikesCounter from './LikesCounter';
+import UserAvatar from './user/UserAvatar';
 
 const postsData = [
   {
@@ -43,10 +47,23 @@ function App() {
     setPosts(newPosts);
   }
 
+  const user = {
+    firstName: 'Miras',
+    lastName: 'Magzom',
+  }
+
   return (
     <div className="App">
-      <LikesCounter count={likedCount} />
-      <PostsList items={posts} onLikedClicked={onLikedClicked} />
+      <Header>
+        <UserAvatar user={user}/>
+      </Header>
+      <div className="App__main">
+        <Sider user={user}></Sider>
+        <Content>
+          <LikesCounter count={likedCount} />
+          <PostsList items={posts} onLikedClicked={onLikedClicked} />
+        </Content>
+      </div>
     </div>
   );
 }

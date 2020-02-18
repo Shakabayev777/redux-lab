@@ -1,4 +1,11 @@
 .App {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App__main {
+  max-height: calc(100% - 50px);
+  display: flex;
 }
 
