@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Provider } from 'react-redux';
+import Main from '../src/Main';
+import store from '../src/redux/store';
 import './App.css';
-import PostsList from './posts/PostsList';
-import Header from './layout/Header';
-import Content from './layout/Content';
-import Sider from './layout/Sider';
-import LikesCounter from './LikesCounter';
-import UserAvatar from './user/UserAvatar';
+
 
 const postsData = [
   {
@@ -33,6 +31,10 @@ function App() {
   const [posts, setPosts] = useState(postsData);
   const [likedCount, setLikedCount] = useState(0);
 
+  // const[user, setUser] = useState({
+  //   //   firstName: 'Assan',
+  //   //   lastName: 'Shakabayev',
+  //   // });
   useEffect(() => {
     setLikedCount(posts.filter(p => p.liked).length);
   }, [posts]);
@@ -45,26 +47,12 @@ function App() {
       return post;
     });
     setPosts(newPosts);
-  }
-
-  const user = {
-    firstName: 'Miras',
-    lastName: 'Magzom',
-  }
+  };
 
   return (
-    <div className="App">
-      <Header>
-        <UserAvatar user={user}/>
-      </Header>
-      <div className="App__main">
-        <Sider user={user}></Sider>
-        <Content>
-          <LikesCounter count={likedCount} />
-          <PostsList items={posts} onLikedClicked={onLikedClicked} />
-        </Content>
-      </div>
-    </div>
+      <Provider store = {store}>
+        <Main />
+      </Provider>
   );
 }
 

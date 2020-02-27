@@ -5,7 +5,10 @@
 }
 
 .App__main {
-  max-height: calc(100% - 50px);
+  height: 100%;
+  /*max-height: calc(100% - 50px);*/
   display: flex;
 }
-
+button {
+  height: 40px;
+}
