@@ -9,14 +9,14 @@ class Post extends React.Component {
                     {this.props.item.title}
                 </div>
                 <div className="Post__item-text">
-                    {this.props.item.text}
+                    {this.props.item.body}
                 </div>
                 <div className="Post__item-buttons">
-                    <button 
+                    <button
                         className={this.props.item.liked ? 'liked' : ''}
                         onClick={() => this.props
                             .onLikedClicked(this.props.item.id)}>
-                        {this.props.item.liked ? 'Liked' : 'Like!'}    
+                        {this.props.item.liked ? 'Liked' : 'Like!'}
                     </button>
                 </div>
             </div>

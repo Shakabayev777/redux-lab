@@ -9,6 +9,8 @@ import './App.css';
 import { connect } from 'react-redux';
 import { setUser } from './redux/actions/user.action';
 import { getUser } from './redux/affects/user.effects';
+import { getPosts } from './redux/affects/post.effects';
+import { setPosts } from './redux/actions/post.action';
 
 const postsData = [
     {
@@ -31,19 +33,16 @@ const postsData = [
     }
 ];
 
-const Main = ( {userData , getUser, isLoading } ) => {
-    console.log(userData);
+const Main = ( {userData , getUser, isLoading, postData, getPosts } ) => {
+    // console.log(postData);
     const [posts, setPosts] = useState(postsData);
     const [likedCount, setLikedCount] = useState(0);
 
     useEffect(() => {
         setLikedCount(posts.filter(p => p.liked).length);
     }, [posts]);
-
-
-
     const onLikedClicked = (postId) => {
-        const newPosts = posts.map(post => {
+        const newPosts = postData.map(post => {
             if (postId === post.id) {
                 post.liked = !post.liked;
             }
@@ -58,6 +57,8 @@ const Main = ( {userData , getUser, isLoading } ) => {
        // }) ;
        getUser();
     });
+    postData!=null &&
+    console.log(postData);
     return(
         <div className="App">
             <Header>
@@ -66,10 +67,11 @@ const Main = ( {userData , getUser, isLoading } ) => {
             <div className="App__main">
                 <Sider>
                 </Sider>
-                <button type="button" className="btn btn-primary" onClick={() => getUser()} >Change name</button>
                 <Content>
+                    <button type="button" className="btn btn-primary" onClick={() => getUser()} >Change name</button>
+                    <button type="button" className="btn btn-primary" onClick={() => getPosts()} >Change post</button>
                     <LikesCounter count={likedCount} />
-                    <PostsList items={posts} onLikedClicked={onLikedClicked} />
+                    <PostsList items={postData} onLikedClicked={onLikedClicked} />
                 </Content>
             </div>
         </div>
@@ -78,5 +80,6 @@ const Main = ( {userData , getUser, isLoading } ) => {
 const mapStateToProps = state => ({
     userData: state.user.userData,
     isLoading: state.user.loading,
+    postData: state.post.postData,
 });
-export default connect(mapStateToProps, { setUser, getUser })(Main);
+export default connect(mapStateToProps, { setUser, getUser, setPosts, getPosts })(Main);

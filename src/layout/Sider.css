@@ -2,4 +2,6 @@
     display: flex;
     flex: 1 0 25%;
     background-color: beige;
+    height: 100%;
+    flex-direction: column;
 }

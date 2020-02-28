@@ -13,6 +13,7 @@ export function getUser() {
                 const {firstName, lastName} = users[
                     Math.floor(Math.random()* users.length)
                     ];
+
                dispatch(setUser({firstName, lastName}));
             })
         .finally (() => {

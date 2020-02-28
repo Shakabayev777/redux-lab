@@ -1,7 +1,7 @@
-export const setUser = user => {
+export const setPosts = post => {
     return {
-        type: 'SET USER',
-        payload: user,
+        type: 'SET POST',
+        payload: post,
     }
 };
 export const setLoading = status => {
