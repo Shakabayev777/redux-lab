@@ -12,33 +12,12 @@ import { getUser } from './redux/affects/user.effects';
 import { getPosts } from './redux/affects/post.effects';
 import { setPosts } from './redux/actions/post.action';
 
-const postsData = [
-    {
-        id: 1,
-        title: 'My first post',
-        text: 'New Post in the blog',
-        liked: false,
-    },
-    {
-        id: 2,
-        title: 'The second post',
-        text: 'Awesome text!',
-        liked: false,
-    },
-    {
-        id: 3,
-        title: 'Another post',
-        text: 'Hello World',
-        liked: false,
-    }
-];
-
 const Main = ( {userData , getUser, isLoading, postData, getPosts } ) => {
-    // console.log(postData);
-    const [posts, setPosts] = useState(postsData);
+    const [posts, setPosts] = useState(postData);
     const [likedCount, setLikedCount] = useState(0);
 
     useEffect(() => {
+        posts!=null &&
         setLikedCount(posts.filter(p => p.liked).length);
     }, [posts]);
     const onLikedClicked = (postId) => {
@@ -50,15 +29,6 @@ const Main = ( {userData , getUser, isLoading, postData, getPosts } ) => {
         });
         setPosts(newPosts);
     };
-    const onNameChangeClick = useCallback(() => {
-       // setUser({
-       //     firstName: 'Bob',
-       //     lastName: 'Sponge',
-       // }) ;
-       getUser();
-    });
-    postData!=null &&
-    console.log(postData);
     return(
         <div className="App">
             <Header>

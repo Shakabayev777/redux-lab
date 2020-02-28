@@ -1,5 +1,4 @@
 import {setLoading, setPosts} from '../actions/post.action';
-// import Post from "src/posts/Post";
 import React from "react";
 
 export function getPosts() {
@@ -11,19 +10,11 @@ export function getPosts() {
                 if(!posts || !posts.length){
                     dispatch(setPosts(null));
                 }
-                // console.log(posts);
-                const {title, body} = posts[
-                    Math.floor(Math.random()* posts.length)
-                    ];
-
-                var liked;
-                posts
-                    .map(post => post.liked='false');
-                // var myPosts=[];
-                // myPosts=posts[1];
-                // myPosts+=posts[3];
-                // myPosts+=posts[5];
+                posts.map(post => post.liked='false');
                 var rand = Math.floor(Math.random()* posts.length);
+                if(rand-3<0 || rand+3>100){
+                    rand=Math.floor(Math.random()* posts.length);
+                }
                 dispatch(setPosts(posts.slice(rand,rand+3)));
             })
             .finally (() => {
